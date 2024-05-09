@@ -1,14 +1,115 @@
+
 #include <iostream>
 #include <string>
 class shape {
 protected:
     std::string name;
     int countsides;
-    int a,b,c;
-    int angle1,angle2,angle3;
 
 public:
-    shape() : countsides(0), name("null"), a(0), b(0), c(0){};
+    shape() : countsides(0), name("null"){};
+    virtual void print_info(){
+        std::cout<< name;
+        std::cout<< countsides;
+    }
+
+
+
+};
+class triangle : public shape {
+protected:
+    int a,b,c;
+    int angle1,angle2,angle3;
+public:
+    triangle(int a,int b,int c,int A,int B,int C)  {
+        if(a >0 && b > 0 && c > 0 && A> 0 && B > 0 && C > 0){
+            this->countsides = 3;
+            this->name = "Треугольник";
+            this->a = a;
+            this->b = b;
+            this->c = c;
+            this->angle1 = A;
+            this->angle2 = B;
+            this->angle3 = C;
+        }else { std::cout << "Ошибка ввода\n";
+            exit(1);
+        }
+
+    }std::string getname(){
+        return this->name;
+    }
+    int countSides(){
+        return this->countsides;
+    }
+    int ReturnA(){
+        return a;
+
+    };
+    int Returnb(){
+        return b;
+
+    };
+    int Returnc(){
+        return c;
+
+    };
+    int Returnangle1(){
+        return angle1;
+
+    };
+    int Returnangle2(){
+        return angle2;
+
+    };
+    int Returnangle3(){
+        return angle3;
+
+    }
+    void print_info() override{
+        std::cout  <<this->getname() << "\n";
+        std::cout << "Количество сторон: "<<this->countSides() << "\n";
+        std::cout << "Стороны: " << "a = " << this->ReturnA()
+                  << " b = " << this->Returnb() << " c = " << this->Returnc() << std::endl;
+        std::cout <<"Углы: " << "A = " << this->Returnangle1() << " B = " << this->Returnangle2() << " C = " << this->Returnangle3() << std::endl;
+        std::cout <<std::endl;
+    }
+
+
+
+
+};
+class righttriangle : public shape {
+protected:
+    int a,b,c;
+    int angle1,angle2,angle3;
+public:
+    righttriangle(int a,int b,int c,int A,int B)  {
+        if(a >0 && b > 0 && c > 0 && A> 0 && B > 0 ){
+            this->countsides = 3;
+            this->name = "Прямоугольный треугольник";
+            this->a = a;
+            this->b= b;
+            this->c = c;
+            this->angle1 = A;
+            this->angle2 = B;
+            this->angle3 = 90;}
+        else{
+            std::cout<< "Ошибка ввода\n";
+            exit(1);
+        }
+
+
+
+    }
+    void print_info() override{
+        std::cout  <<this->getname() << "\n";
+        std::cout << "Количество сторон: "<<this->countSides() << "\n";
+        std::cout << "Стороны: " << "a = " << this->ReturnA()
+                  << " b = " << this->Returnb() << " c = " << this->Returnc() << std::endl;
+        std::cout <<"Углы: " << "A = " << this->Returnangle1() << " B = " << this->Returnangle2() << " C = " << this->Returnangle3() << std::endl;
+        std::cout <<std::endl;
+    }
+
     std::string getname(){
         return this->name;
     }
@@ -38,80 +139,154 @@ public:
     int Returnangle3(){
         return angle3;
 
-    };
-
-};
-class triangle : public shape {
-public:
-triangle(int a,int b,int c,int A,int B,int C)  {
-    if(a >0 && b > 0 && c > 0 && A> 0 && B > 0 && C > 0){
-        this->countsides = 3;
-        this->name = "Треугольник";
-        this->a = a;
-        this->b = b;
-        this->c = c;
-        this->angle1 = A;
-        this->angle2 = B;
-        this->angle3 = C;
-    }else { std::cout << "Ошибка ввода\n";
-    exit(1);
-    };
-
-}
-
-
-
-};
-class righttriangle : public shape {
-public:
-righttriangle(int a,int b,int c,int A,int B)  {
-    this->countsides = 3;
-    this->name = "Прямоугольный треугольник";
-this->a = a;
-this->b= b;
-this->c = c;
-this->angle1 = A;
-this->angle2 = B;
-this->angle3 = 90;
-
-}
+    }
 };
 class isoscelestriangle : public shape {
+protected:
+    int a,b,c;
+    int angle1,angle2,angle3;
 public:
+
     isoscelestriangle(int a, int b, int A, int B){
-        this->countsides = 3;
-    this->name = "Равнобедренный треугольник";
-    this->a = a;
-    this->c = a;
-    this->angle1 = A;
-    this->angle3 = A;
-    this->b =b;
-    this->angle2 =B;
+        if (a >0 && b > 0  && A> 0 && B > 0){
+            this->countsides = 3;
+            this->name = "Равнобедренный треугольник";
+            this->a = a;
+            this->c = a;
+            this->angle1 = A;
+            this->angle3 = A;
+            this->b =b;
+            this->angle2 =B;
+        } else{
+            std::cout<<"Ошибка ввода\n";
+            exit(1);
+        }}
+    void print_info() override{
+        std::cout  <<this->getname() << "\n";
+        std::cout << "Количество сторон: "<<this->countSides() << "\n";
+        std::cout << "Стороны: " << "a = " << this->ReturnA()
+                  << " b = " << this->Returnb() << " c = " << this->Returnc() << std::endl;
+        std::cout <<"Углы: " << "A = " << this->Returnangle1() << " B = " << this->Returnangle2() << " C = " << this->Returnangle3() << std::endl;
+        std::cout <<std::endl;
     }
+
+    std::string getname(){
+        return this->name;
+    }
+    int countSides(){
+        return this->countsides;
+    }
+    int ReturnA(){
+        return a;
+
+    };
+    int Returnb(){
+        return b;
+
+    };
+    int Returnc(){
+        return c;
+
+
+    }
+    int Returnangle1(){
+        return angle1;
+
+    };
+    int Returnangle2(){
+        return angle2;
+
+    };
+    int Returnangle3(){
+        return angle3;
+
+    }
+
 };
 class equilateraltriangle: public shape{
+protected:
+    int a, b, c;
+    int angle1,angle2,angle3;
 public:
     equilateraltriangle(int a){
-        this->countsides = 3;
-        this->name ="Равносторонний треугольник";
-        this->a = a;
-        this->b = a;
-        this->c = a;
-        this->angle2 = 60;
-        this->angle3 = 60;
-        this->angle1 = 60;
+        if(a >0 ){
+            this->countsides = 3;
+            this->name ="Равносторонний треугольник";
+            this->a = a;
+            this->b = a;
+            this->c = a;
+            this->angle2 = 60;
+            this->angle3 = 60;
+            this->angle1 = 60;
+        } else
+        {std::cout<< "Ошибка ввода\n";
+            exit(1);
+
+        }}
+    void print_info() override{
+        std::cout  <<this->getname() << "\n";
+        std::cout << "Количество сторон: "<<this->countSides() << "\n";
+        std::cout << "Стороны: " << "a = " << this->ReturnA()
+                  << " b = " << this->Returnb() << " c = " << this->Returnc() << std::endl;
+        std::cout <<"Углы: " << "A = " << this->Returnangle1() << " B = " << this->Returnangle2() << " C = " << this->Returnangle3() << std::endl;
+        std::cout <<std::endl;
     }
+
+    std::string getname(){
+        return this->name;
+    }
+    int countSides(){
+        return this->countsides;
+    }
+    int ReturnA(){
+        return a;
+
+    };
+    int Returnb(){
+        return b;
+
+    };
+    int Returnc(){
+        return c;
+
+    };
+    int Returnangle1(){
+        return angle1;
+
+    };
+    int Returnangle2(){
+        return angle2;
+
+    };
+    int Returnangle3(){
+        return angle3;
+
+    }
+
 };
 
-class shape1{
+
+class rectangle: public  shape{
 protected:
-    std::string name;
-    int countsides;
     int a,b,c,d;
     int angle1,angle2,angle3,angle4;
-
 public:
-    shape1() : countsides(0), name("null"), a(0), b(0), c(0),d(0),angle1(0),angle2(0),angle3(0),angle4(0){};
+    rectangle(int a, int b){
+        if(a>0&& b>0){
+            this->name = "Прямоугольник";
+            this->countsides =4;
+            this->a = a;
+            this->c = a;
+            this->b = b;
+            this->d = b;
+            this->angle1 = 90;
+            this->angle2 = 90;
+            this->angle3 = 90;
+            this->angle4 = 90;}
+        else{std::cout<< "Ошибка ввода\n";
+            exit(1);
+        }
+    }
     std::string getname(){
         return this->name;
     }
@@ -150,109 +325,240 @@ public:
         return angle4;
 
     };
-};
-class rectangle: public  shape1{
-public:
-    rectangle(int a, int b){
-        this->name = "Прямоугольник";
-        this->countsides =4;
-        this->a = a;
-        this->c = a;
-        this->b = b;
-        this->d = b;
-        this->angle1 = 90;
-        this->angle2 = 90;
-        this->angle3 = 90;
-        this->angle4 = 90;
-    }
 
+    void print_info() override{
+        std::cout  <<this->getname() << "\n";
+        std::cout << "Количество сторон: "<<this->countSides() << "\n";
+        std::cout << "Стороны: " << "a = " << this->ReturnA()
+                  << " b = " << this->Returnb() << " c = " << this->Returnc() << " d = "<< this->Returnd()<< std::endl;
+        std::cout <<"Углы: " << "A = " << this->Returnangle1() << " B = " << this->Returnangle2() << " C = " << this->Returnangle3()<< " D = "<< this->Returnangle4() << std::endl;
+        std::cout <<std::endl;
+    }
 };
-class rect: public  shape1{
+class rect: public  shape{
+protected:
+    int angle1,angle2,angle3,angle4;
+    int a,b,c,d;
 public:
     rect(int num) {
-        this->name = "Квадрат";
-        this->countsides =4;
-        this->b = num;
-        this->a = num;
-        this->c = num;
-        this->d = num;
-        this->angle4 = 90;
-        this->angle1 = 90;
-        this->angle2 = 90;
-        this->angle3 = 90;
+        if(num>0){
+            this->name = "Квадрат";
+            this->countsides =4;
+            this->b = num;
+            this->a = num;
+            this->c = num;
+            this->d = num;
+            this->angle4 = 90;
+            this->angle1 = 90;
+            this->angle2 = 90;
+            this->angle3 = 90;} else{
+            std::cout<< "Ошибка ввода\n";
+            exit(1);
+        }
+    }
+    std::string getname(){
+        return this->name;
+    }
+    int countSides(){
+        return this->countsides;
+    }
+    int ReturnA(){
+        return a;
+
+    };
+    int Returnb(){
+        return b;
+
+    };
+    int Returnc(){
+        return c;
+
+    };
+    int Returnd(){
+        return d;
+
+    };
+    int Returnangle1(){
+        return angle1;
+
+    };
+    int Returnangle2(){
+        return angle2;
+
+    };
+    int Returnangle3(){
+        return angle3;
+
+    };
+    int Returnangle4(){
+        return angle4;
+
+
+    };
+    void print_info() override{
+        std::cout  <<this->getname() << "\n";
+        std::cout << "Количество сторон: "<<this->countSides() << "\n";
+        std::cout << "Стороны: " << "a = " << this->ReturnA()
+                  << " b = " << this->Returnb() << " c = " << this->Returnc() << " d = "<< this->Returnd()<< std::endl;
+        std::cout <<"Углы: " << "A = " << this->Returnangle1() << " B = " << this->Returnangle2() << " C = " << this->Returnangle3()<< " D = "<< this->Returnangle4() << std::endl;
+        std::cout <<std::endl;
     }
 
-
-
 };
-class parallelogram: public shape1{
+class parallelogram: public shape{
+protected:
+    int a,b,c,d;
+    int angle1,angle2,angle3,angle4;
 public:
-   parallelogram(int a,int b, int A, int D){
-       this->countsides = 4;
-       this->a = a;
-       this->c = a;
-       this->b = b;
-       this->d = b;
-       this->angle1 = A;
-       this->angle3 = A;
-       this->angle2 = D;
-       this->angle4 = D;
-       this->name = "Параллелограмм";
+    parallelogram(int a,int b, int A, int D){
+        if(a>0&& b>0&&A>0&&D>0){
+            this->countsides = 4;
+            this->a = a;
+            this->c = a;
+            this->b = b;
+            this->d = b;
+            this->angle1 = A;
+            this->angle3 = A;
+            this->angle2 = D;
+            this->angle4 = D;
+            this->name = "Параллелограмм";}
+        else{
+            std::cout<< "Ошибка ввода\n";
+            exit(1);
+        }
 
-   }
+    }std::string getname(){
+        return this->name;
+    }
+    int countSides(){
+        return this->countsides;
+    }
+    int ReturnA(){
+        return a;
+
+    };
+    int Returnb(){
+        return b;
+
+    };
+    int Returnc(){
+        return c;
+
+    };
+    int Returnd(){
+        return d;
+
+    };
+    int Returnangle1(){
+        return angle1;
+
+    };
+    int Returnangle2(){
+        return angle2;
+
+    };
+    int Returnangle3(){
+        return angle3;
+
+    };
+    int Returnangle4(){
+        return angle4;
+
+    };
+    void print_info() override{
+        std::cout  <<this->getname() << "\n";
+        std::cout << "Количество сторон: "<<this->countSides() << "\n";
+        std::cout << "Стороны: " << "a = " << this->ReturnA()
+                  << " b = " << this->Returnb() << " c = " << this->Returnc() << " d = "<< this->Returnd()<< std::endl;
+        std::cout <<"Углы: " << "A = " << this->Returnangle1() << " B = " << this->Returnangle2() << " C = " << this->Returnangle3()<< " D = "<< this->Returnangle4() << std::endl;
+        std::cout <<std::endl;
+    }
+
 };
-class rhombus: public shape1 {
+class rhombus: public shape {
+protected:
+    int a,b,c,d;
+    int angle1,angle2,angle3,angle4;
 public:
     rhombus(int a, int A, int B)
-    {
-        this->countsides = 4;
-        this->name = "Ромб";
-        this->a = a;
-        this->c = a;
-        this->b = a;
-        this->d = a;
-        this->angle1 = A;
-        this->angle3 = A;
-        this->angle2 = B;
-        this->angle4 = B;
+    { if (a>0&& A>0&& B>0){
+            this->countsides = 4;
+            this->name = "Ромб";
+            this->a = a;
+            this->c = a;
+            this->b = a;
+            this->d = a;
+            this->angle1 = A;
+            this->angle3 = A;
+            this->angle2 = B;
+            this->angle4 = B;} else{
+            std::cout<< "Ошибка ввода\n";
+            exit(1);
+        }
+    }
+    std::string getname(){
+        return this->name;
+    }
+    int countSides(){
+        return this->countsides;
+    }
+    int ReturnA(){
+        return a;
+
+    };
+    int Returnb(){
+        return b;
+
+    };
+    int Returnc(){
+        return c;
+
+    };
+    int Returnd(){
+        return d;
+
+    };
+    int Returnangle1(){
+        return angle1;
+
+    };
+    int Returnangle2(){
+        return angle2;
+
+    };
+    int Returnangle3(){
+        return angle3;
+
+    };
+    int Returnangle4(){
+        return angle4;
+
+    };
+    void print_info() override{
+        std::cout  <<this->getname() << "\n";
+        std::cout << "Количество сторон: "<<this->countSides() << "\n";
+        std::cout << "Стороны: " << "a = " << this->ReturnA()
+                  << " b = " << this->Returnb() << " c = " << this->Returnc() << " d = "<< this->Returnd()<< std::endl;
+        std::cout <<"Углы: " << "A = " << this->Returnangle1() << " B = " << this->Returnangle2() << " C = " << this->Returnangle3()<< " D = "<< this->Returnangle4() << std::endl;
+        std::cout <<std::endl;
     }
 };
-void print_info(shape * ptr){
-    std::cout  <<ptr->getname() << "\n";
-    std::cout << "Количество сторон: "<<ptr->countSides() << "\n";
-    std::cout << "Стороны: " << "a = " << ptr->ReturnA()
-              << " b = " << ptr->Returnb() << " c = " << ptr->Returnc() << std::endl;
-    std::cout <<"Углы: " << "A = " << ptr->Returnangle1() << " B = " << ptr->Returnangle2() << " C = " << ptr->Returnangle3() << std::endl;
 
-
-
-}
-void print_info(shape1 * ptr){
-    std::cout  <<ptr->getname() << "\n";
-    std::cout << "Количество сторон: "<<ptr->countSides() << "\n";
-    std::cout << "Стороны: " << "a = " << ptr->ReturnA()
-              << " b = " << ptr->Returnb() << " c = " << ptr->Returnc() << " d = " << ptr->Returnd() << std::endl;
-    std::cout <<"Углы: " << "A = " << ptr->Returnangle1() << " B = " << ptr->Returnangle2() << " C = " << ptr->Returnangle3() << " D = " << ptr->Returnangle4()<< std::endl;
-
-
-
-}
 void treug(){
-    shape* a = new shape();
-    print_info(a);
-    std::cout << std::endl;
+
+
     triangle* b= new triangle(10,20,30,50,60,70);
-    print_info(b);
-    std::cout << std::endl;
+    b->print_info();
+
     righttriangle* c= new righttriangle(10,20,30,50,60);
-    print_info(c);
-    std::cout << std::endl;
+
+    c->print_info();
     isoscelestriangle* d= new isoscelestriangle(10,15,40,50);
-    print_info(d);
-    std::cout << std::endl;
+    d->print_info();
+
     equilateraltriangle* e= new  equilateraltriangle(10);
-    print_info(e);
-    delete a;
+    e->print_info();
+
     delete b;
     delete c;
     delete d;
@@ -260,21 +566,20 @@ void treug(){
 }
 
 void qwadr(){
-shape1 * a = new shape1;
-    print_info(a);
-    std::cout << std::endl;
+
+
     rectangle * b = new rectangle(30,20);
-    print_info(b);
-    std::cout << std::endl;
+    b->print_info();
+
     rect * c = new rect(20);
-    print_info(c);
-    std::cout << std::endl;
+    c->print_info();
+
     parallelogram * d = new parallelogram(10,30,15,40);
-    print_info(d);
-    std::cout << std::endl;
+    d->print_info();
+
     rhombus * e = new rhombus(10,23,40);
-    print_info(e);
-    delete a;
+    e->print_info();
+
     delete b;
     delete c;
     delete d;
